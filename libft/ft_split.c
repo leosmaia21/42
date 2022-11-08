@@ -14,7 +14,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int	ft_count_words(const char *s, char c)
+static int	ft_count_words(const char *s, char c)
 {
 	int	words;
 	int	i;
@@ -35,7 +35,7 @@ int	ft_count_words(const char *s, char c)
 	return (words);
 }
 
-void	ft_alloc(const char *s, char **f, char c)
+static void	ft_alloc(const char *s, char **f, char c)
 {
 	int	i;
 	int	size;
@@ -61,7 +61,7 @@ void	ft_alloc(const char *s, char **f, char c)
 		f[index] = malloc(sizeof(char) * (size + 1));
 }
 
-void	ft_copy(const char *s, char **f, char c, int words)
+static void	ft_copy(const char *s, char **f, char c, int words)
 {
 	int	i;
 	int	j;
