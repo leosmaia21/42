@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 18:20:16 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/08 02:26:12 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:01:48 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ char	**ft_split(char const *s, char c)
 	int		words;
 	char	**p;
 
+	if (!s)
+		return (NULL);
 	words = ft_count_words(s, c);
 	p = malloc(sizeof(char *) * (words + 1));
 	if (!p)

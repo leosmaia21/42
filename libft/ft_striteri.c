@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 21:52:18 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/08 18:10:03 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:58:11 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
 	int		i;
 
-	if (!f)
+	if (!f || !s)
 		return ;
 	i = 0;
 	while (s[i])

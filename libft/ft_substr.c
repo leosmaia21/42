@@ -6,7 +6,7 @@
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 22:19:53 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/08 03:15:32 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/08 18:58:45 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	char		*p;
 
 	p = malloc(sizeof(char) * (len + 1));
-	if (!p)
+	if (!p || !s)
 		return (NULL);
 	if ((unsigned int)ft_strlen(s) <= start)
 	{

@@ -6,7 +6,7 @@
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 18:29:50 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/07 18:16:47 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/08 19:00:35 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	char	*final;
 	int		c;
 
+	if (!s1 || !s2)
+		return (NULL);
 	c = 0;
 	s1l = ft_strlen(s1);
 	s2l = ft_strlen(s2);
