@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 21:46:24 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/08 18:08:34 by ledos-sa         ###   ########.fr       */
+/*   Created: 2022/11/08 17:38:49 by ledos-sa          #+#    #+#             */
+/*   Updated: 2022/11/08 18:07:24 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	char	*p;
-	int		i;
-
-	if (!f)
-		return (0);
-	i = 0;
-	p = malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (!p)
+	if (!f || !del)
 		return (NULL);
-	while (s[i])
+	while (lst)
 	{
-		p[i] = f(i, s[i]);
-		i++;
+		:w	
 	}
-	p[i] = 0;
-	return (p);
 }
