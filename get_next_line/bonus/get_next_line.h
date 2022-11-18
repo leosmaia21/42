@@ -1,18 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/07 21:55:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/07 21:57:13 by ledos-sa         ###   ########.fr       */
+/*   Created: 2022/11/18 20:47:19 by ledos-sa          #+#    #+#             */
+/*   Updated: 2022/11/18 21:34:29 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
+# include <string.h>
+# include <stdlib.h>
+# include <unistd.h>
+
+void		*ft_calloc(size_t nmemb, size_t size);
+int			ft_strlen(const char *s);
+char		*ft_strjoin(char const *s1, char const *s2);
+char		*ft_strchr(const char *s, int c);
+unsigned	int	ft_strlcpy(char *dst, const char *src, size_t size);
+#endif
