@@ -6,27 +6,45 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:46:50 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/18 22:42:02 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/20 22:47:26 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void	*ft_calloc(size_t nmemb, size_t size)
+void	*ft_bzero(void *s, int n)
 {
-	size_t		i;
-	char		*p;
+	unsigned char	*p;
+	int				i;
 
-	p = malloc(nmemb * size);
-	if (!p)
-		return (NULL);
 	i = 0;
-	while (i < nmemb * size)
+	p = (unsigned char *)s;
+	while (i < n)
 	{
 		p[i] = 0;
 		i++;
 	}
 	return (p);
+}
+
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	char	*str;
+	size_t	i;
+	size_t	n;
+
+	n = nmemb * size;
+	str = (char *)malloc(n);
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (n > 0)
+	{
+		str[i] = '\0';
+		i++;
+		n--;
+	}
+	return ((void *)str);
 }
 
 int	ft_strlen(const char *s)
@@ -75,6 +93,8 @@ char	*ft_strchr(const char *s, int c)
 
 	i = 0;
 	str = (char *)s;
+	if (!s)
+		return (NULL);
 	while (str[i] != '\0')
 	{
 		if (str[i] == c)
