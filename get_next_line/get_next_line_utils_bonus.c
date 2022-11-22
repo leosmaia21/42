@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 20:46:50 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/22 17:49:38 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/22 17:53:30 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_bzero(void *s, int n)
 {

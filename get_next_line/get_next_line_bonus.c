@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/20 18:14:04 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/22 17:38:55 by ledos-sa         ###   ########.fr       */
+/*   Created: 2022/11/22 17:52:31 by ledos-sa          #+#    #+#             */
+/*   Updated: 2022/11/22 17:52:53 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 #include <stddef.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -91,27 +91,15 @@ char	*shiftbuffer(char *buf)
 
 char	*get_next_line(int fd)
 {
-	static char	*buffer;
+	static char	*buffer[4096];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	buffer = read_line(fd, buffer);
-	if (!buffer)
+	buffer[fd] = read_line(fd, buffer[fd]);
+	if (!buffer[fd])
 		return (NULL);
-	line = get_line(buffer);
-	buffer = shiftbuffer(buffer);
+	line = get_line(buffer[fd]);
+	buffer[fd] = shiftbuffer(buffer[fd]);
 	return (line);
 }
-
-/* int main(void) */
-/* { */
-/* 	int fd = open ("gnlTester/files/multiple_nlx5", O_RDONLY); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	printf("%s",get_next_line(fd)); */
-/* 	return 0; */
-/* } */

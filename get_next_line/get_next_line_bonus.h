@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/22 17:52:07 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/22 17:52:09 by ledos-sa         ###   ########.fr       */
+/*   Created: 2022/11/18 20:47:19 by ledos-sa          #+#    #+#             */
+/*   Updated: 2022/11/22 17:53:19 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <string.h>
 # include <stdlib.h>
