@@ -6,27 +6,29 @@
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 17:30:41 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/07 22:21:37 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:37:53 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stddef.h>
-#include <stdlib.h>
+#include <stdint.h>
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	size_t		i;
-	char		*p;
+	char	*str;
+	size_t	i;
+	size_t	n;
 
-	p = malloc(nmemb * size);
-	if (!p)
-		return (NULL);
+	n = nmemb * size;
+	str = (char *)malloc(n);
+	if (str == NULL)
+		return (0);
 	i = 0;
-	while (i < nmemb * size)
+	while (n > 0)
 	{
-		p[i] = 0;
+		str[i] = 0;
 		i++;
+		n--;
 	}
-	return (p);
+	return ((void *)str);
 }

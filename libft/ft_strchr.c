@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/06 16:35:48 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/06 16:35:51 by ledos-sa         ###   ########.fr       */
+/*   Created: 2022/11/10 17:04:43 by ledos-sa          #+#    #+#             */
+/*   Updated: 2022/11/10 17:04:48 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,12 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
-	char	*str;
-
-	i = 0;
-	str = (char *)s;
-	while (str[i] != '\0')
+	while (*s != (char)c)
 	{
-		if (str[i] == c)
-			return (&str[i]);
-		i++;
+		if (*(s++) == 0)
+			return (NULL);
 	}
-	if (c == '\0')
-		return (&str[i]);
-	return (0);
+	return ((char *)s);
 }
 
 /*int	main(void)

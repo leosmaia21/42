@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 23:35:01 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/07 23:35:46 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:26:36 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ char	*ft_strdup(const char *s1)
 	char	*str;
 	size_t	i;
 
-	if (!s1)
-		return (NULL);
 	str = (char *)malloc(sizeof(*s1) * (ft_strlen(s1) + 1));
 	if (!str)
 		return (NULL);

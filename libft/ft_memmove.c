@@ -6,7 +6,7 @@
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 13:57:04 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/08 03:04:47 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:26:00 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	int	i;
 
-	if (!dst || !src)
-		return (NULL);
+	if (len == 0 || dst == src)
+		return (dst);
 	if (dst > src)
 	{
 		i = len - 1;

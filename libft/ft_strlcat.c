@@ -6,14 +6,14 @@
 /*   By: ledos-sa <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/06 14:56:38 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/07 23:28:29 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/10 19:31:18 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stddef.h>
 
-unsigned int	ft_strlcat(char *dst, char *src, size_t size)
+size_t	ft_strlcat(char *dst, char *src, size_t size)
 {
 	size_t	srclen;
 	size_t	dstlen;
