@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 20:06:44 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/24 19:06:11 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/24 19:55:44 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	ft_put_ptr(unsigned long long p, int *l)
 		if (p < 10)
 			(*l) += printchar(p + '0');
 		else
-			(*l) += printchar(p + 'a');
+			(*l) += printchar(p - 10 + 'a');
 	}
 }
 
@@ -75,6 +75,8 @@ int	ft_printptr(unsigned long long p)
 {
 	int	size;
 
+	if (!p)
+		return (ft_printstr("(nil)"));
 	size = 0;
 	size += write(1, "0x", 2);
 	ft_put_ptr(p, &size);
