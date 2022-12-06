@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/06 21:26:35 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:46:30 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,22 @@
 #include <stdio.h>
 #include <string.h>
 
-
 void	mandelbrot(t_data *img)
 {
 	int			x;
 	int			y;
 	t_complex	cord;
+	t_point		p;
 
 	x = -1;
 	y = -1;
+	p.x = 2;
+	p.y = 2;
 	while (++y < SIZE)
 	{
 		while (++x < SIZE)
 		{
-			cord = pixels2cord(x, y);
+			cord = pixels2cord(x, y, p, 1);
 			my_mlx_pixel_put(img, (int)x, (int)y, \
 				0x0000f1ff * diverge_maldelbrot(&cord));
 		}
@@ -43,14 +45,17 @@ void	julia(t_data *img, t_complex *c)
 	int			x;
 	int			y;
 	t_complex	cord;
+	t_point		p;
 
 	x = -1;
 	y = -1;
+	p.x = 2;
+	p.y = 2;
 	while (++y < SIZE)
 	{
 		while (++x < SIZE)
 		{
-			cord = pixels2cord(x, y);
+			cord = pixels2cord(x, y, p, 1);
 			my_mlx_pixel_put(img, (int)x, (int)y, \
 				0x0000f1ff * diverge_julia(&cord, c));
 		}
@@ -71,6 +76,7 @@ void	draw(int x, t_complex c)
 	img.img = mlx_new_image(vars.mlx, SIZE, SIZE);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
+	vars.img = &img;
 	if (x == 1)
 		mandelbrot(&img);
 	else if (x == 2)

@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/06 21:34:04 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/06 22:57:50 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,9 @@ int	key_hook(int keycode, t_vars *vars)
 
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
-	(void)x;
-	(void)y;
-	if (button == 5)
-		mlx_destroy_window(vars->mlx, vars->win);
+	if (button == 1)
+		my_mlx_pixel_put(vars->img, x, y, 0x0000f1ff);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 	return (0);
 }
 

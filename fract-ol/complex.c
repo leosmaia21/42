@@ -6,26 +6,19 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/06 19:11:11 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/06 23:46:31 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "complex.h"
 #include <math.h>
 
-t_complex	pixels2cord(int x, int y)
+t_complex	pixels2cord(int x, int y, t_point p, double zoom)
 {
-	const int			max = SIZE * 1 / 2;
 	t_complex			cord;	
 
-	if (y <= SIZE / 2)
-		cord.imag = ((SIZE / 2.0) - y) * 2.0 / max;
-	else
-		cord.imag = -((y - (SIZE / 2.0)) * 2.0 / max);
-	if (x <= SIZE / 2)
-		cord.real = -((SIZE / 2.0) - x) * 2.0 / max;
-	else
-		cord.real = ((x - (SIZE / 2.0)) * 2.0 / max);
+	cord.real = (((double)x / SIZE) * 4 / zoom) - p.x;
+	cord.imag = (((double)y / SIZE) * 4 / zoom) - p.y;
 	return (cord);
 }
 
