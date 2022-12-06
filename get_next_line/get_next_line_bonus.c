@@ -6,16 +6,11 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 17:52:31 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/22 17:52:53 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:11:54 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <stddef.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <unistd.h>
 
 char	*read_line(int fd, char *buf)
 {
