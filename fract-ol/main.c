@@ -6,61 +6,94 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/06 18:33:28 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/06 21:26:35 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilibx-linux/mlx.h"
 #include "libft/libft.h"
-#include <math.h>
 #include "complex.h"
+#include "minilib.h"
+#include <stdio.h>
+#include <string.h>
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}				t_data;
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	mandelbrot(t_data *img)
 {
-	char	*dst;
+	int			x;
+	int			y;
+	t_complex	cord;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	x = -1;
+	y = -1;
+	while (++y < SIZE)
+	{
+		while (++x < SIZE)
+		{
+			cord = pixels2cord(x, y);
+			my_mlx_pixel_put(img, (int)x, (int)y, \
+				0x0000f1ff * diverge_maldelbrot(&cord));
+		}
+		x = -1;
+	}
 }
 
-int	main(void)
+void	julia(t_data *img, t_complex *c)
 {
-	void		*mlx;
-	void		*mlx_win;
-	t_data		img;
+	int			x;
+	int			y;
 	t_complex	cord;
-	t_complex	point;
-	t_complex	julia;
 
-	julia.real = -0.8;
-	julia.imag = 0.156;
+	x = -1;
+	y = -1;
+	while (++y < SIZE)
+	{
+		while (++x < SIZE)
+		{
+			cord = pixels2cord(x, y);
+			my_mlx_pixel_put(img, (int)x, (int)y, \
+				0x0000f1ff * diverge_julia(&cord, c));
+		}
+		x = -1;
+	}
+}
+
+void	draw(int x, t_complex c)
+{
+	t_vars		vars;
+	t_data		img;
+	t_complex	point;
+
 	point.imag = -1;
 	point.real = -1;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, SIZE, SIZE, "Hello world!");
-	img.img = mlx_new_image(mlx, SIZE, SIZE);
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, SIZE, SIZE, "Hello world!");
+	img.img = mlx_new_image(vars.mlx, SIZE, SIZE);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	while (++point.imag < SIZE)
+	if (x == 1)
+		mandelbrot(&img);
+	else if (x == 2)
+		julia(&img, &c);
+	mlx_put_image_to_window(vars.mlx, vars.win, img.img, 0, 0);
+	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_mouse_hook(vars.win, mouse_hook, &vars);
+	mlx_loop(vars.mlx);
+}
+
+int	main(int argc, char **argv)
+{
+	t_complex	c;
+
+	c.imag = 0;
+	c.real = 0;
+	if (!ft_strncmp(argv[1], "mandelbrot", 10))
+		draw(1, c);
+	if (!ft_strncmp(argv[1], "julia", 5) && argc != 4)
 	{
-		while (++point.real < SIZE)
-		{
-			cord = pixels2cord(point.real, point.imag);
-			my_mlx_pixel_put(&img, (int)point.real, (int)point.imag, \
-				0x0000f1ff * diverge_maldelbrot(&cord));
-			/* my_mlx_pixel_put(&img, (int)point.real, (int)point.imag, \ */
-			/* 	0x0000f1ff * diverge_julia(&cord, &julia)); */
-		}
-		point.real = -1;
+		c.real = (double)ft_atoi(argv[2]);
+		c.imag = (double)ft_atoi(argv[3]);
+		draw(2, c);
 	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	return (0);
 }

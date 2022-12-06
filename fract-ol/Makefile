@@ -1,11 +1,11 @@
 CC = clang
 MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
-SRCS = main.c complex.c
-CFLAGS =  -O3 -lm
+SRCS = main.c complex.c minilib.c libft/libft.a
+CFLAGS =  -O3 -Wall -Wextra -Werror 
 # -Wall -Wextra -Werror
 
 OBJ = $(SRCS:.c=.o)
-NAME = mandelbrot
+NAME = fract-ol
 
 all: $(NAME)
 
