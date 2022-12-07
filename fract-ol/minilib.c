@@ -6,12 +6,16 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/06 22:57:50 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/07 01:10:26 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilib.h"
 #include "minilibx-linux/mlx.h"
+#include "complex.h"
+
+void	mandelbrot(t_data *img, t_point p, t_vars *vars);
+void	julia(t_data *img, t_complex *c, t_point p, t_vars *vars);
 
 int	key_hook(int keycode, t_vars *vars)
 {
@@ -22,9 +26,23 @@ int	key_hook(int keycode, t_vars *vars)
 
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
-	if (button == 1)
-		my_mlx_pixel_put(vars->img, x, y, 0x0000f1ff);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
+	static double	zoom = 1;
+	t_point			p;
+
+	p.x = 4 - (((double)x / SIZE) * 4);
+	p.y = 4 - (((double)y / SIZE) * 4);
+	if (button == 4)
+	{
+		zoom += 1.5;
+		p.zoom = zoom;
+		mandelbrot(vars->img, p, vars);
+	}
+	if (button == 5)
+	{
+		zoom -= 1.5;
+		p.zoom = zoom;
+		mandelbrot(vars->img, p, vars);
+	}
 	return (0);
 }
 
