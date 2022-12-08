@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 19:27:52 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/11/24 19:55:58 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/11/24 23:25:21 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,14 @@ int	ft_printf(const char *str, ...)
 	return (len);
 }
 
-/* int main(int argc, char *argv[]) */
-/* { */
-/* 	int x = -10; */
-/* 	int len; */
-/* 	char s[]="olai"; */
-/* 	len =ft_printf("%p",15); */
-/* 	/1* len= ft_printf("%s\n",s); *1/ */
-/* 	/1* ft_printf("%d",len); *1/ */
-/* 	/1* printf("%p\n",15); *1/ */
-/* 	return 0; */
-/* } */
+int main(int argc, char *argv[])
+{
+	int x = -10;
+	int len;
+	char s[]="olai";
+	len =ft_printf("%p",15);
+	/* len= ft_printf("%s\n",s); */
+	/* ft_printf("%d",len); */
+	/* printf("%p\n",15); */
+	return 0;
+}
