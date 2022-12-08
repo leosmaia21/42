@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/07 15:34:17 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:25:05 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,16 @@ int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
 
+	(void)argc;
 	fractal.c.imag = 0;
 	fractal.c.real = 0;
 	fractal.zoom = 1;
+	fractal.p_point.real = 0;
+	fractal.p_point.imag = 0;
+	fractal.range_x.out_min = -2;
+	fractal.range_x.out_max = 2;
+	fractal.range_y.out_min = -2;
+	fractal.range_y.out_max = 2;
 	if (!ft_strncmp(argv[1], "mandelbrot", 10))
 	{
 		fractal.name = argv[1];

@@ -6,17 +6,23 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/07 15:32:28 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/07 23:12:57 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "complex.h"
 #include <math.h>
 
+double	map(double x, t_range range)
+{
+	return (x * (range.out_max - range.out_min) / (SIZE - 1) + range.out_min);
+}
+
 void	pixels2cord(int x, int y, t_fractal *fractal)
 {
-	fractal->cord.real = fractal->cord.real + (((double)x / SIZE / fractal->zoom) * 4) - (2 / (fractal->zoom));
-	fractal->cord.imag = fractal->cord.imag + (((double)y / SIZE / fractal->zoom) * 4) - (2 / (fractal->zoom));
+	y = SIZE - y;
+	fractal->cord.real = map(x, fractal->range_x);
+	fractal->cord.imag = map(y, fractal->range_y);
 }
 
 int	diverge_julia(t_fractal *fractal)
