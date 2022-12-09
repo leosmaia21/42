@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:44:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/08 02:01:28 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:52:33 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define COMPLEX_H
 
 # define SIZE 720
-# define LOOPS 350
+# define LOOPS 200
 
 typedef struct point{
 	double	real;
@@ -22,8 +22,8 @@ typedef struct point{
 }	t_point;
 
 typedef struct range{
-	double	out_min;
-	double	out_max;
+	double	min;
+	double	max;
 }	t_range;
 
 typedef struct complex{

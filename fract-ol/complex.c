@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/07 23:12:57 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 15:30:51 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,12 @@
 
 double	map(double x, t_range range)
 {
-	return (x * (range.out_max - range.out_min) / (SIZE - 1) + range.out_min);
+	return (x * (range.max - range.min) / (SIZE - 1) + range.min);
+}
+
+double map2screen(double x, t_range range)
+{
+	return (x - range.min) * ( SIZE - 0) / (range.max - range.min) + 0;
 }
 
 void	pixels2cord(int x, int y, t_fractal *fractal)
