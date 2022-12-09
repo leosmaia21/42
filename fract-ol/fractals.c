@@ -6,11 +6,12 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 19:10:15 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:21:04 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "complex.h"
+#include "fractals.h"
 #include "minilib.h"
 #include "minilibx-linux/mlx.h"
 
@@ -26,7 +27,7 @@ void	mandelbrot(t_fractal *fractal)
 		while (++x < SIZE)
 		{
 			pixels2cord(x, y, fractal);
-			my_mlx_pixel_put(fractal->vars->img, (int)x, (int)y, \
+			my_mlx_pixel_put(fractal->vars->img, x, y, \
 				fractal->color * diverge_maldelbrot(fractal));
 			fractal->cord.real = 0;
 			fractal->cord.imag = 0;
@@ -49,8 +50,29 @@ void	julia(t_fractal *fractal)
 		while (++x < SIZE)
 		{
 			pixels2cord(x, y, fractal);
-			my_mlx_pixel_put(fractal->vars->img, (int)x, (int)y, \
+			my_mlx_pixel_put(fractal->vars->img, x, y, \
 				fractal->color * diverge_julia(fractal));
+		}
+		x = -1;
+	}
+	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win,
+		fractal->vars->img->img, 0, 0);
+}
+
+void	burning_ship(t_fractal *fractal)
+{
+	int			x;
+	int			y;
+
+	x = -1;
+	y = -1;
+	while (++y < SIZE)
+	{
+		while (++x < SIZE)
+		{
+			pixels2cord(x, y, fractal);
+			my_mlx_pixel_put(fractal->vars->img, x, y, \
+				fractal->color * diverge_burning_ship(fractal));
 		}
 		x = -1;
 	}

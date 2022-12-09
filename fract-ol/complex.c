@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 19:09:50 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:53:52 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ double	map(double x, t_range *range)
 
 void	pixels2cord(int x, int y, t_fractal *fractal)
 {
-	y = SIZE - y;
+	y = SIZE - 1 - y;
 	fractal->cord.real = map(x, &fractal->range_x);
 	fractal->cord.imag = map(y, &fractal->range_y);
 }
@@ -61,6 +61,34 @@ int	diverge_maldelbrot(t_fractal *fractal)
 	i = 0;
 	while (++i < fractal->loops)
 	{
+		aux = new_point.real;
+		new_point.real = (new_point.real * new_point.real) - \
+			(new_point.imag * new_point.imag) + fractal->cord.real;
+		new_point.imag = (2 * aux * new_point.imag) + fractal->cord.imag;
+		module = (new_point.real * new_point.real) + \
+			(new_point.imag * new_point.imag);
+		if (module > 4)
+			return (i);
+	}
+	return (0);
+}
+
+int	diverge_burning_ship(t_fractal *fractal)
+{
+	int			i;
+	double		module;
+	double		aux;
+	t_point		new_point;
+
+	new_point.real = 0;
+	new_point.imag = 0;
+	i = 0;
+	while (++i < fractal->loops)
+	{
+		if (new_point.real < 0)
+			new_point.real *= -1.0;
+		if (new_point.imag < 0)
+			new_point.imag *= -1.0;
 		aux = new_point.real;
 		new_point.real = (new_point.real * new_point.real) - \
 			(new_point.imag * new_point.imag) + fractal->cord.real;

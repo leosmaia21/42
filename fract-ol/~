@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 20:57:40 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:35:00 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include "complex.h"
 #include "minilib.h"
 #include "fractals.h"
-#include <math.h>
 
 void	draw(int x, t_fractal *fractal)
 {
@@ -51,58 +50,59 @@ void	init(t_fractal *fractal)
 	mlx_mouse_hook(fractal->vars->win, mouse_hook, fractal);
 }
 
-double	atof(const char *s)
+double atof(const char *s)
 {
 	double	a;
 	int		e;
-	int		negative;
 
 	a = 0.0;
 	e = 0;
-	negative = *s == '-';
-	if (*s == '-')
-		s++;
-	while (*s != '\0' && ft_isdigit(*s))
-		a = a * 10.0 + (*s++ - '0');
-	if (*s++ == '.')
+	while (*s++ != '\0' && ft_isdigit(c))
+		a = a * 10.0 + (*s - '0');
+	if (c == '.')
 	{
-		while (*s != '\0' && ft_isdigit(*s))
+		while ((c = *s++) != '\0' && ft_isdigit(c))
 		{
-			a = a * 10.0 + (*s++ - '0');
-			e++;
+			a = a * 10.0 + (c - '0');
+			e = e - 1;
 		}
 	}
-	a = a * (1.0 / pow(10, e));
-	if (negative)
-		a *= -1;
+	while (e < 0)
+	{
+		a *= 0.1;
+		e++;
+	}
 	return (a);
 }
 
 int	main(int argc, char **argv)
 {
-	t_fractal	fractal;
-	t_vars		vars;
-	t_data		img;
+	printf("%f\n", atof(argv[1]));
+	/* t_fractal	fractal; */
+	/* t_vars		vars; */
+	/* t_data		img; */
 
-	fractal.vars = &vars;
-	fractal.vars->img = &img;
-	(void)argc;
-	init(&fractal);
-	if (!ft_strncmp(argv[1], "mandelbrot", 10))
-	{
-		fractal.name = 1;
-		draw(1, &fractal);
-	}
-	if (!ft_strncmp(argv[1], "julia", 5))
-	{
-		fractal.name = 2;
-		fractal.c.real = atof(argv[2]);
-		fractal.c.imag = atof(argv[3]);
-		draw(2, &fractal);
-	}
-	if (!ft_strncmp(argv[1], "burning", 1))
-	{
-		fractal.name = 3;
-		draw(3, &fractal);
-	}
+	/* fractal.vars = &vars; */
+	/* fractal.vars->img = &img; */
+	/* (void)argc; */
+	/* init(&fractal); */
+	/* if (!ft_strncmp(argv[1], "mandelbrot", 10)) */
+	/* { */
+	/* 	fractal.name = 1; */
+	/* 	draw(1, &fractal); */
+	/* } */
+	/* if (!ft_strncmp(argv[1], "julia", 5)) */
+	/* { */
+	/* 	fractal.name = 2; */
+	/* 	/1* fractal.c.real = (double)ft_atoi(argv[2]); *1/ */
+	/* 	/1* fractal.c.imag = (double)ft_atoi(argv[3]); *1/ */
+	/* 	fractal.c.imag = -0.8; */
+	/* 	fractal.c.real = 0; */
+	/* 	draw(2, &fractal); */
+	/* } */
+	/* if (!ft_strncmp(argv[1], "burning", 1)) */
+	/* { */
+	/* 	fractal.name = 3; */
+	/* 	draw(3, &fractal); */
+	/* } */
 }

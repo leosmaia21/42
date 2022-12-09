@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:59:26 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 19:10:03 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 20:22:26 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ typedef struct fractal{
 }	t_fractal;
 void	mandelbrot(t_fractal *fractal);
 void	julia(t_fractal *fractal);
+void	burning_ship(t_fractal *fractal);
 
 #endif
