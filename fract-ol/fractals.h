@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:59:26 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 18:01:49 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:24:40 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "complex.h"
 # include "minilib.h"
 
-void	mandelbrot(t_vars *vars);
-void	julia(t_vars *vars);
+void	mandelbrot(t_fractal *fractal);
+void	julia(t_fractal *fractal);
 
 #endif

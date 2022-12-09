@@ -6,24 +6,21 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 16:58:45 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:36:03 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minilib.h"
 #include "minilibx-linux/mlx.h"
 #include "complex.h"
+#include "fractals.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void		mandelbrot(t_vars *vars);
-void		julia(t_vars *vars);
+void	draw(int x, t_fractal *fractal);
 
-void	move_arrows(t_vars *vars, int keycode)
+void	move_arrows(t_fractal *fractal, int keycode)
 {
-	t_fractal	*fractal;
-
-	fractal = vars->fractal;
 	if (keycode == 65362)
 	{
 		fractal->range_y.max += fractal->zoom * 2 * 0.1;
@@ -46,17 +43,17 @@ void	move_arrows(t_vars *vars, int keycode)
 	}
 }
 
-int	key_hook(int keycode, t_vars *vars)
+int	key_hook(int keycode, t_fractal *fractal)
 {
 	if (keycode == 65307)
 	{
-		mlx_destroy_window(vars->mlx, vars->win);
+		mlx_destroy_window(fractal->vars->mlx, fractal->vars->win);
 		exit(1);
 	}
 	if (keycode >= 65361 && keycode <= 65364)
 	{
-		move_arrows(vars, keycode);
-		mandelbrot(vars);
+		move_arrows(fractal, keycode);
+		draw(fractal->name, fractal);
 	}
 	return (0);
 }
@@ -77,12 +74,10 @@ void	zoom_and_move(t_fractal *fractal, int x, int y, t_point old)
 	fractal->range_y.max += old.imag - new.imag;
 }
 
-int	mouse_hook(int button, int x, int y, t_vars *vars)
+int	mouse_hook(int button, int x, int y, t_fractal *fractal)
 {
-	t_fractal		*fractal;
 	t_point			old;
 
-	fractal = vars->fractal;
 	y = SIZE - y;
 	old.real = map((double)x, &(fractal->range_x));
 	old.imag = map((double)y, &(fractal->range_y));
@@ -97,7 +92,7 @@ int	mouse_hook(int button, int x, int y, t_vars *vars)
 		fractal->loops -= 1;
 	}
 	zoom_and_move(fractal, x, y, old);
-	mandelbrot(vars);
+	draw(fractal->name, fractal);
 	return (0);
 }
 
