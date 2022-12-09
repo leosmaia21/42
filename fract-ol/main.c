@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 20:57:40 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 21:28:31 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init(t_fractal *fractal)
 			&fractal->vars->img->endian);
 	mlx_key_hook(fractal->vars->win, key_hook, fractal);
 	mlx_mouse_hook(fractal->vars->win, mouse_hook, fractal);
+	mlx_hook(fractal->vars->win, 17, 0, bye, fractal->vars);
 }
 
 double	atof(const char *s)

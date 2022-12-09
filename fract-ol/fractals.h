@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:59:26 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 20:22:26 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 21:26:29 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ typedef struct fractal{
 void	mandelbrot(t_fractal *fractal);
 void	julia(t_fractal *fractal);
 void	burning_ship(t_fractal *fractal);
-
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 #endif
