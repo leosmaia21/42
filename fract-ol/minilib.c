@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 15:51:16 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:58:45 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,61 +14,90 @@
 #include "minilibx-linux/mlx.h"
 #include "complex.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 void		mandelbrot(t_vars *vars);
 void		julia(t_vars *vars);
-double		map(double x, t_range range);
-double		map2screen(double x, t_range range);
+
+void	move_arrows(t_vars *vars, int keycode)
+{
+	t_fractal	*fractal;
+
+	fractal = vars->fractal;
+	if (keycode == 65362)
+	{
+		fractal->range_y.max += fractal->zoom * 2 * 0.1;
+		fractal->range_y.min += fractal->zoom * 2 * 0.1;
+	}
+	if (keycode == 65364)
+	{
+		fractal->range_y.max -= fractal->zoom * 2 * 0.1;
+		fractal->range_y.min -= fractal->zoom * 2 * 0.1;
+	}
+	if (keycode == 65363)
+	{
+		fractal->range_x.max += fractal->zoom * 2 * 0.1;
+		fractal->range_x.min += fractal->zoom * 2 * 0.1;
+	}
+	if (keycode == 65361)
+	{
+		fractal->range_x.max -= fractal->zoom * 2 * 0.1;
+		fractal->range_x.min -= fractal->zoom * 2 * 0.1;
+	}
+}
 
 int	key_hook(int keycode, t_vars *vars)
 {
-	if (keycode == 27)
+	if (keycode == 65307)
+	{
 		mlx_destroy_window(vars->mlx, vars->win);
+		exit(1);
+	}
+	if (keycode >= 65361 && keycode <= 65364)
+	{
+		move_arrows(vars, keycode);
+		mandelbrot(vars);
+	}
 	return (0);
+}
+
+void	zoom_and_move(t_fractal *fractal, int x, int y, t_point old)
+{
+	t_point	new;
+
+	fractal->range_x.min = -2 * fractal->zoom;
+	fractal->range_x.max = 2 * fractal->zoom;
+	fractal->range_y.min = -2 * fractal->zoom;
+	fractal->range_y.max = 2 * fractal->zoom;
+	new.real = map((double)x, &(fractal->range_x));
+	new.imag = map((double)y, &(fractal->range_x));
+	fractal->range_x.min += old.real - new.real;
+	fractal->range_x.max += old.real - new.real;
+	fractal->range_y.min += old.imag - new.imag;
+	fractal->range_y.max += old.imag - new.imag;
 }
 
 int	mouse_hook(int button, int x, int y, t_vars *vars)
 {
-	static double	zoom = 1;
 	t_fractal		*fractal;
 	t_point			old;
-	t_point			new;
-	t_point			perc;
 
 	fractal = vars->fractal;
 	y = SIZE - y;
+	old.real = map((double)x, &(fractal->range_x));
+	old.imag = map((double)y, &(fractal->range_y));
 	if (button == 4)
 	{
-		old.real = map((double)x, fractal->range_x);
-		old.imag = map((double)y, fractal->range_y);
-		perc.real = (double)x / SIZE;
-		perc.imag = (double)y / SIZE;
-		fractal->range_x.min = -2 * zoom;
-		fractal->range_x.max = 2 * zoom;
-		fractal->range_y.min = -2 * zoom;
-		fractal->range_y.max = 2 * zoom;
-		zoom *= 0.95;
-		new.real = map((double)x, vars->fractal->range_x);
-		new.imag = map((double)y, vars->fractal->range_x);
-		fractal->range_x.min += old.real - new.real;
-		fractal->range_x.max += old.real - new.real;
-		fractal->range_y.min += old.imag - new.imag;
-		fractal->range_y.max += old.imag - new.imag;
-		mandelbrot(vars);
+		fractal->zoom *= 0.95;
+		fractal->loops += 1;
 	}
 	if (button == 5)
 	{
-		vars->fractal->range_x.min = -2 * zoom;
-		vars->fractal->range_x.max = 2 * zoom;
-		vars->fractal->range_y.min = -2 * zoom;
-		vars->fractal->range_y.max = 2 * zoom;
-		zoom /= 0.95;
-		/* vars->fractal->range_x.out_min -= ((double)x / SIZE * 2 - 2) * zoom; */
-		/* vars->fractal->range_x.out_max += ((double)x / SIZE * 2 - 2) * zoom; */
-		/* vars->fractal->range_y.out_min -= ((double)x / SIZE * 2 - 2) * zoom; */
-		/* vars->fractal->range_y.out_max += ((double)x / SIZE * 2 - 2) * zoom; */
-		mandelbrot(vars);
+		fractal->zoom /= 0.95;
+		fractal->loops -= 1;
 	}
+	zoom_and_move(fractal, x, y, old);
+	mandelbrot(vars);
 	return (0);
 }
 

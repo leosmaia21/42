@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 15:53:03 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 18:03:03 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,9 @@
 #include "libft/libft.h"
 #include "complex.h"
 #include "minilib.h"
+#include "fractals.h"
 #include <stdio.h>
 #include <string.h>
-
-void	mandelbrot(t_vars *vars)
-{
-	int			x;
-	int			y;
-
-	x = -1;
-	y = -1;
-	while (++y < SIZE)
-	{
-		while (++x < SIZE)
-		{
-			pixels2cord(x, y, vars->fractal);
-			my_mlx_pixel_put(vars->img, (int)x, (int)y, \
-				0x0000f1ff * diverge_maldelbrot(vars->fractal));
-			vars->fractal->cord.real = 0;
-			vars->fractal->cord.imag = 0;
-		}
-		x = -1;
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
-}
-
-void	julia(t_vars *vars)
-{
-	int			x;
-	int			y;
-
-	x = -1;
-	y = -1;
-	while (++y < SIZE)
-	{
-		while (++x < SIZE)
-		{
-			pixels2cord(x, y, vars->fractal);
-			my_mlx_pixel_put(vars->img, (int)x, (int)y, \
-				0x0000f1ff * diverge_julia(vars->fractal));
-		}
-		x = -1;
-	}
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
-}
 
 void	draw(int x, t_fractal *fractal)
 {
@@ -80,6 +39,7 @@ void	draw(int x, t_fractal *fractal)
 	mlx_loop(vars.mlx);
 }
 
+
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
@@ -88,20 +48,19 @@ int	main(int argc, char **argv)
 	fractal.c.imag = 0;
 	fractal.c.real = 0;
 	fractal.zoom = 1;
-	fractal.p_point.real = 0;
-	fractal.p_point.imag = 0;
 	fractal.range_x.min = -2;
 	fractal.range_x.max = 2;
 	fractal.range_y.min = -2;
 	fractal.range_y.max = 2;
+	fractal.loops = 200;
 	if (!ft_strncmp(argv[1], "mandelbrot", 10))
 	{
-		fractal.name = argv[1];
+		fractal.name = 1;
 		draw(1, &fractal);
 	}
 	if (!ft_strncmp(argv[1], "julia", 5))
 	{
-		fractal.name = argv[1];
+		fractal.name = 2;
 		fractal.c.real = (double)ft_atoi(argv[2]);
 		fractal.c.imag = (double)ft_atoi(argv[3]);
 		draw(2, &fractal);

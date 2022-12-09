@@ -6,28 +6,23 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 15:30:51 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 16:24:18 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "complex.h"
 #include <math.h>
 
-double	map(double x, t_range range)
+double	map(double x, t_range *range)
 {
-	return (x * (range.max - range.min) / (SIZE - 1) + range.min);
-}
-
-double map2screen(double x, t_range range)
-{
-	return (x - range.min) * ( SIZE - 0) / (range.max - range.min) + 0;
+	return (x * (range->max - range->min) / (SIZE - 1) + range->min);
 }
 
 void	pixels2cord(int x, int y, t_fractal *fractal)
 {
 	y = SIZE - y;
-	fractal->cord.real = map(x, fractal->range_x);
-	fractal->cord.imag = map(y, fractal->range_y);
+	fractal->cord.real = map(x, &fractal->range_x);
+	fractal->cord.imag = map(y, &fractal->range_y);
 }
 
 int	diverge_julia(t_fractal *fractal)
@@ -40,7 +35,7 @@ int	diverge_julia(t_fractal *fractal)
 	new_point.real = fractal->cord.real;
 	new_point.imag = fractal->cord.imag;
 	i = 0;
-	while (++i < LOOPS)
+	while (++i < fractal->loops)
 	{
 		aux = new_point.real;
 		new_point.real = (new_point.real * new_point.real) - \
@@ -64,7 +59,7 @@ int	diverge_maldelbrot(t_fractal *fractal)
 	new_point.real = 0;
 	new_point.imag = 0;
 	i = 0;
-	while (++i < LOOPS)
+	while (++i < fractal->loops)
 	{
 		aux = new_point.real;
 		new_point.real = (new_point.real * new_point.real) - \
