@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 18:20:59 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:10:15 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ void	mandelbrot(t_fractal *fractal)
 	{
 		while (++x < SIZE)
 		{
-			pixels2cord(x, y,fractal);
+			pixels2cord(x, y, fractal);
 			my_mlx_pixel_put(fractal->vars->img, (int)x, (int)y, \
-				0x0000f1ff * diverge_maldelbrot(fractal));
+				fractal->color * diverge_maldelbrot(fractal));
 			fractal->cord.real = 0;
 			fractal->cord.imag = 0;
 		}
 		x = -1;
 	}
-	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win, fractal->vars->img->img, 0, 0);
+	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win,
+		fractal->vars->img->img, 0, 0);
 }
 
 void	julia(t_fractal *fractal)
@@ -49,9 +50,10 @@ void	julia(t_fractal *fractal)
 		{
 			pixels2cord(x, y, fractal);
 			my_mlx_pixel_put(fractal->vars->img, (int)x, (int)y, \
-				0x0000f1ff * diverge_julia(fractal));
+				fractal->color * diverge_julia(fractal));
 		}
 		x = -1;
 	}
-	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win, fractal->vars->img->img, 0, 0);
+	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win,
+		fractal->vars->img->img, 0, 0);
 }

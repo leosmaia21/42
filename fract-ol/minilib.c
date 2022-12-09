@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 18:36:03 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:03:03 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ int	key_hook(int keycode, t_fractal *fractal)
 	if (keycode >= 65361 && keycode <= 65364)
 	{
 		move_arrows(fractal, keycode);
+		draw(fractal->name, fractal);
+	}
+	if (keycode == 'a')
+	{
+		fractal->color += 100;
 		draw(fractal->name, fractal);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 18:33:33 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:10:27 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	init(t_fractal *fractal)
 	fractal->range_y.min = -2;
 	fractal->range_y.max = 2;
 	fractal->loops = 200;
+	fractal->color = 0x0000f1ff;
 	fractal->vars->mlx = mlx_init();
 	fractal->vars->win = mlx_new_window(fractal->vars->mlx, SIZE, SIZE,
 			"Fract-ol");

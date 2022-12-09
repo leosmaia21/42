@@ -6,11 +6,11 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 14:48:06 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 16:24:18 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 19:09:50 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "complex.h"
+#include "fractals.h"
 #include <math.h>
 
 double	map(double x, t_range *range)
