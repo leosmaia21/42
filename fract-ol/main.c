@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 13:45:12 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 21:28:31 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/10 01:21:55 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "complex.h"
 #include "minilib.h"
 #include "fractals.h"
+#include "libftprintf/ft_printf.h"
 #include <math.h>
 
 void	draw(int x, t_fractal *fractal)
@@ -30,8 +31,6 @@ void	draw(int x, t_fractal *fractal)
 
 void	init(t_fractal *fractal)
 {
-	fractal->c.imag = 0;
-	fractal->c.real = 0;
 	fractal->zoom = 1;
 	fractal->range_x.min = -2;
 	fractal->range_x.max = 2;
@@ -79,6 +78,24 @@ double	atof(const char *s)
 	return (a);
 }
 
+void	print(int argc, char **argv)
+{
+	if (argc > 1)
+	{
+		if (!ft_strncmp(argv[1], "mandelbrot", 10) && argc == 2)
+			return ;
+		if (!ft_strncmp(argv[1], "julia", 5) && argc == 4)
+			return ;
+		if (!ft_strncmp(argv[1], "burning_ship", 12) && argc == 2)
+			return ;
+	}
+	ft_printf("Valores de entrada errados\n");
+	ft_printf("Sets disponíveis: mandelbrot, julia, burning_ship\n");
+	ft_printf("Se for julia, adicionar o ponto\n");
+	ft_printf("Ex: ./fract-ol julia -0.7269 0.1889\n");
+	exit(1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fractal	fractal;
@@ -87,21 +104,21 @@ int	main(int argc, char **argv)
 
 	fractal.vars = &vars;
 	fractal.vars->img = &img;
-	(void)argc;
+	print(argc, argv);
 	init(&fractal);
-	if (!ft_strncmp(argv[1], "mandelbrot", 10))
+	if (!ft_strncmp(argv[1], "mandelbrot", ft_strlen(argv[1])))
 	{
 		fractal.name = 1;
 		draw(1, &fractal);
 	}
-	if (!ft_strncmp(argv[1], "julia", 5))
+	if (!ft_strncmp(argv[1], "julia", ft_strlen(argv[1])))
 	{
 		fractal.name = 2;
 		fractal.c.real = atof(argv[2]);
 		fractal.c.imag = atof(argv[3]);
 		draw(2, &fractal);
 	}
-	if (!ft_strncmp(argv[1], "burning", 1))
+	if (!ft_strncmp(argv[1], "burning_ship", ft_strlen(argv[1])))
 	{
 		fractal.name = 3;
 		draw(3, &fractal);

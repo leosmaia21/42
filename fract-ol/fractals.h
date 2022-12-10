@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:59:26 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 21:26:29 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 22:27:29 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct fractal{
 	int		loops;
 	t_vars	*vars;
 	long	color;
+	long	matriz[SIZE][SIZE];
 }	t_fractal;
 void	mandelbrot(t_fractal *fractal);
 void	julia(t_fractal *fractal);

@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 21:26:29 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2022/12/09 23:17:42 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ void	mandelbrot(t_fractal *fractal)
 			pixels2cord(x, y, fractal);
 			my_mlx_pixel_put(fractal->vars->img, x, y, \
 				fractal->color * diverge_maldelbrot(fractal));
-			fractal->cord.real = 0;
-			fractal->cord.imag = 0;
 		}
 		x = -1;
 	}
