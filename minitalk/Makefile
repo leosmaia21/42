@@ -12,7 +12,7 @@
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-NAME = libft.a
+
 
 SERVER = server
 CLIENT = client
@@ -27,8 +27,8 @@ SERVER_BONUS_OBJS = ${SERVER_BONUS_SRCS:.c=.o}
 CLIENT_OBJS = ${CLIENT_SRCS:.c=.o}
 CLIENT_BONUS_OBJS = ${CLIENT_BONUS_SRCS:.c=.o}
 LIBFT= libft/libft.a
-
-all: $(NAME)
+NAME = $(SERVER) $(CLIENT)
+all: $(NAME) 
 
 $(NAME): ${SERVER_OBJS} ${CLIENT_OBJS} ${LIBFT}
 	${CC} ${SERVER_OBJS} libft/libft.a -o ${SERVER}
