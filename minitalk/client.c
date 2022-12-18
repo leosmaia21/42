@@ -16,7 +16,7 @@
 
 void	send_mds(int pid, char *msg)
 {
-	int	c
+	int	c;
 	int	index;
 	index = 0;
 	while (*msg)
