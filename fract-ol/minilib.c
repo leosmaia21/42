@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 19:56:21 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/09 21:27:01 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/01/14 14:26:23 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ void	move_arrows(t_fractal *fractal, int keycode)
 int	key_hook(int keycode, t_fractal *fractal)
 {
 	if (keycode == 65307)
-	{
-		mlx_destroy_window(fractal->vars->mlx, fractal->vars->win);
-		exit(1);
-	}
+		bye(fractal->vars);
 	if (keycode >= 65361 && keycode <= 65364)
 	{
 		move_arrows(fractal, keycode);
@@ -103,7 +100,9 @@ int	mouse_hook(int button, int x, int y, t_fractal *fractal)
 
 int	bye(t_vars *vars)
 {
+	mlx_destroy_image(vars->mlx, vars->img->img);
 	mlx_destroy_window(vars->mlx, vars->win);
-	exit(1);
-	return (0);
+	mlx_destroy_display(vars->mlx);
+	free(vars->mlx);
+	exit(0);
 }

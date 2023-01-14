@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2022/12/11 17:13:44 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/01/14 15:07:27 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	mandelbrot(t_fractal *fractal)
 
 	x = -1;
 	y = -1;
+
 	while (++y < SIZE)
 	{
 		while (++x < SIZE)
