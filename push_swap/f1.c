@@ -6,13 +6,13 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 17:27:23 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/01/15 17:57:50 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:40:04 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "helper.h"
 
-void	pa(t_number *stack_a, t_number stack_b)
+void	pa(t_number **stack_a, t_number **stack_b)
 {
-	
+		
 }

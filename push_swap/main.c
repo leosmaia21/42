@@ -6,12 +6,13 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/15 15:49:20 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/01/15 20:15:08 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:18:50 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "helper.h"
+#include <stdio.h>
 #include <stdlib.h>
 
 void	bubble_sort(int *arr, int n)
@@ -95,7 +96,7 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	set_index(stack_a, argc - 1);
-	stack_a = rx(stack_a);
+	rx(&stack_a);
 	while (stack_a)
 	{
 		printf("%d\n", stack_a->number);
