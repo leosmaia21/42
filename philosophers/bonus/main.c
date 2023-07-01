@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 17:03:27 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/07/01 18:56:24 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:07:19 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,14 +109,10 @@ void	philo(sem_t *sem, t_info i)
 		i.time[1] = gt();
 		printf("%lu %d is eating\n", gt() - i.time[0], i.id + 1);
 		usleep(i.timetoeat * 1000);
-		if (checkifdied(i) == 1)
-			return ;
 		sem_post(sem);
-		if (checkifdied(i) == 1)
-			return ;
 		sem_post(sem);
 		usleep(i.timetosleep * 1000);
-		if (checkifdied(i) == 1)
+		if (checkifdied(i) == 1) 
 			return ;
 	}
 }

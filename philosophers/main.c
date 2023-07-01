@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 13:56:39 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/07/01 19:02:12 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/07/01 20:12:28 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,11 +135,11 @@ uint32_t	rightfork(t_info *info, uint32_t state, uint32_t g, uint64_t time[])
 
 uint8_t	eat(t_info *i, uint8_t hand)
 {
-	i->time[1] = gt();
 	printf("%lu %d is eating\n", gt() - i->time[0], i->id + 1);
 	usleep(i->timetoeat * 1000);
-	if (gt() - i->time[1] >= i->timetodie)
-		return (DIED);
+	i->time[1] = gt();
+	// if (gt() - i->time[1] >= i->timetodie)
+	// 	return (DIED);
 	if (hand == RIGHTHAND)
 	{
 		i->state = rightfork(i, i->state, PUTDOWN, i->time);
@@ -152,8 +152,11 @@ uint8_t	eat(t_info *i, uint8_t hand)
 	}
 	i->state = THINKING;
 	printf("%lu %d is sleeping\n", gt() - i->time[0], i->id + 1);
-	usleep(i->timetosleep * 1000);
 	i->time[1] = gt();
+	if (i->timetosleep <= i->timetodie)
+		usleep(i->timetosleep * 1000);
+	else
+		usleep(i->timetodie * 1000);
 	if (gt() - i->time[1] >= i->timetodie)
 		return (DIED);
 	return (ALIVE);
