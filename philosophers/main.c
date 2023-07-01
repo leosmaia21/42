@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 13:56:39 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/07/01 00:01:12 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:02:12 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,12 +179,11 @@ void	*philoeven(void *info)
 		}
 		i->state = rightfork(info, i->state, TAKE, i->time);
 		i->state = leftfork(info, i->state, TAKE, i->time);
-		if (i->state == BOTH)
-			if (eat(i, RIGHTHAND) == DIED)
-			{
+		if (i->state == BOTH && eat(i, RIGHTHAND) == DIED)
+		{
 			printf("%lu %d died\n", gt() - i->time[0], i->id + 1);
 			return (0);
-			}
+		}
 	}
 }
 
@@ -208,12 +207,11 @@ void	*philoodd(void *info)
 		}
 		i->state = leftfork(info, i->state, TAKE, i->time);
 		i->state = rightfork(info, i->state, TAKE, i->time);
-		if (i->state == BOTH)
-			if (eat(i, LEFTHAND) == DIED)
-			{
+		if (i->state == BOTH && eat(i, LEFTHAND) == DIED)
+		{
 			printf("%lu %d died\n", gt() - i->time[0], i->id + 1);
 			return (0);
-			}
+		}
 	}
 }
 
@@ -228,7 +226,6 @@ void	threads(t_info *info, uint32_t *forks, pthread_t *philosthreads, pthread_mu
 		left = i - 1;
 		if (i == 0)
 			left = info->numberofphilos - 1;
-
 		forks[i] = 0;
 		info[i].id = i;
 		info[i].state = THINKING;
