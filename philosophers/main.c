@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 13:56:39 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/07/01 20:12:28 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:45:28 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_info{
 	uint32_t		timetosleep;
 	uint32_t		state;
 	uint64_t		time[2];
+	uint32_t		*end;
 }	t_info;
 
 #define BOTH 3
@@ -138,8 +139,6 @@ uint8_t	eat(t_info *i, uint8_t hand)
 	printf("%lu %d is eating\n", gt() - i->time[0], i->id + 1);
 	usleep(i->timetoeat * 1000);
 	i->time[1] = gt();
-	// if (gt() - i->time[1] >= i->timetodie)
-	// 	return (DIED);
 	if (hand == RIGHTHAND)
 	{
 		i->state = rightfork(i, i->state, PUTDOWN, i->time);
@@ -151,6 +150,8 @@ uint8_t	eat(t_info *i, uint8_t hand)
 		i->state = rightfork(i, i->state, PUTDOWN, i->time);
 	}
 	i->state = THINKING;
+	if (*i->end == 1)
+		return (0);
 	printf("%lu %d is sleeping\n", gt() - i->time[0], i->id + 1);
 	i->time[1] = gt();
 	if (i->timetosleep <= i->timetodie)
@@ -167,7 +168,7 @@ void	*philoeven(void *info)
 	t_info		*i;
 
 	i = (t_info *)info;
-	while (1)
+	while (*i->end == 0)
 	{
 		if (i->state == THINKING && gt() - i->time[1] < i->timetodie)
 		{
@@ -178,6 +179,7 @@ void	*philoeven(void *info)
 		if (gt() - i->time[1] > i->timetodie)
 		{
 			printf("%lu %d died\n", gt() - i->time[0], i->id + 1);
+			*i->end = 1;
 			return (0);
 		}
 		i->state = rightfork(info, i->state, TAKE, i->time);
@@ -188,6 +190,7 @@ void	*philoeven(void *info)
 			return (0);
 		}
 	}
+	return (0);
 }
 
 void	*philoodd(void *info)
@@ -195,7 +198,7 @@ void	*philoodd(void *info)
 	t_info		*i;
 
 	i = (t_info *)info;
-	while (1)
+	while (*i->end == 0)
 	{
 		if (i->state == THINKING && gt() - i->time[1] < i->timetodie)
 		{
@@ -206,6 +209,7 @@ void	*philoodd(void *info)
 		if (gt() - i->time[1] > i->timetodie)
 		{
 			printf("%lu %d died\n", gt() - i->time[0], i->id + 1);
+			*i->end = 1;
 			return (0);
 		}
 		i->state = leftfork(info, i->state, TAKE, i->time);
@@ -216,6 +220,7 @@ void	*philoodd(void *info)
 			return (0);
 		}
 	}
+	return (0);
 }
 
 void	threads(t_info *info, uint32_t *forks, pthread_t *philosthreads, pthread_mutex_t *mutex)
@@ -250,8 +255,11 @@ void	threads(t_info *info, uint32_t *forks, pthread_t *philosthreads, pthread_mu
 void	init(t_info *info, char **argv, pthread_mutex_t *mutex)
 {
 	int32_t			i;
+	uint32_t		*end;
 
 	i = -1;
+	end = malloc(sizeof(uint32_t));
+	*end = 0;
 	while (++i < ft_atoi(argv[1]))
 	{
 		pthread_mutex_init(&mutex[i], NULL);
@@ -261,6 +269,8 @@ void	init(t_info *info, char **argv, pthread_mutex_t *mutex)
 		info[i].numberofphilos = ft_atoi(argv[1]);
 		info[i].time[0] = gt();
 		info[i].time[1] = gt();
+		info[i].end = end;
+
 	}
 }
 
@@ -282,6 +292,7 @@ int	main(int argc, char **argv)
 	i = -1;
 	while (++i < ft_atoi(argv[1]))
 		pthread_join(philosthreads[i], NULL);
+	free(info->end);
 	free(info);
 	free(forks);
 	free(philosthreads);
