@@ -6,7 +6,7 @@
 /*   By: ledos-sa <ledos-sa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 17:58:11 by ledos-sa          #+#    #+#             */
-/*   Updated: 2023/01/14 15:07:27 by ledos-sa         ###   ########.fr       */
+/*   Updated: 2023/07/10 13:01:42 by ledos-sa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "minilib.h"
 #include "minilibx-linux/mlx.h"
 
-void	mandelbrot(t_fractal *fractal)
+void	mandelbrot(t_fractal *fractall)
 {
 	int			x;
 	int			y;
@@ -27,14 +27,14 @@ void	mandelbrot(t_fractal *fractal)
 	{
 		while (++x < SIZE)
 		{
-			pixels2cord(x, y, fractal);
-			my_mlx_pixel_put(fractal->vars->img, x, y, \
-				fractal->color * diverge_maldelbrot(fractal));
+			pixels2cord(x, y, fractall);
+			my_mlx_pixel_put(fractall->vars->img, x, y, \
+				fractall->color * diverge_maldelbrot(fractall));
 		}
 		x = -1;
 	}
-	mlx_put_image_to_window(fractal->vars->mlx, fractal->vars->win,
-		fractal->vars->img->img, 0, 0);
+	mlx_put_image_to_window(fractall->vars->mlx, fractall->vars->win,
+		fractall->vars->img->img, 0, 0);
 }
 
 void	julia(t_fractal *fractal)
